@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Mera Hunar - Worker</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 25px 50px;
+        }
+
+
+        header h1 {
+            font-size: 30px;
+        }
+
+
+        header p {
+            margin-top: 6px;
+            color: #d1d5db;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back {
+            background: transparent;
+            color: #2563eb;
+            border: none;
+            padding: 0;
+            margin-bottom: 25px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+
+        .back:hover {
+            color: #1d4ed8;
+            background: transparent;
+        }
+
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+
+        /* =========================
+           TITLE
+        ========================= */
+
+        .title {
+            text-align: center;
+        }
+
+
+        .icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           VOICE
+        ========================= */
+
+        .voice-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+
+        .voice-button {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: none;
+            background: #2563eb;
+            color: white;
+            font-size: 55px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+            transition: 0.2s;
+        }
+
+
+        .voice-button:hover {
+            transform: scale(1.04);
+            background: #1d4ed8;
+        }
+
+
+        .voice-button.listening {
+            background: #dc2626;
+            animation: pulse 1.2s infinite;
+        }
+
+
+        @keyframes pulse {
+
+            0% {
+                box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.5);
+            }
+
+            70% {
+                box-shadow: 0 0 0 25px rgba(220, 38, 38, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+            }
+
+        }
+
+
+        .voice-text {
+            margin-top: 15px;
+            font-size: 17px;
+            font-weight: bold;
+            color: #374151;
+        }
+
+
+        .language-text {
+            margin-top: 7px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           LABEL
+        ========================= */
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+
+        /* =========================
+           TEXTAREA
+        ========================= */
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 16px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+
+        textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+
+        /* =========================
+           EXAMPLE
+        ========================= */
+
+        .example {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 12px;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           PROFILE BUTTON
+        ========================= */
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            background: #2563eb;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+
+        .submit-btn:hover {
+            background: #1d4ed8;
+        }
+
+
+        .submit-btn:disabled {
+            background: #93c5fd;
+            cursor: not-allowed;
+        }
+
+
+        /* =========================
+           RESULT
+        ========================= */
+
+        #result {
+            margin-top: 25px;
+        }
+
+
+        .loading {
+            text-align: center;
+            color: #6b7280;
+            font-size: 17px;
+            padding: 20px;
+        }
+
+
+        .profile {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+
+        .profile h3 {
+            margin-bottom: 15px;
+            color: #166534;
+        }
+
+
+        .profile p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           SKILLS
+        ========================= */
+
+        .skill {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 6px 10px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error-box {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #b91c1c;
+            padding: 15px;
+            border-radius: 10px;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           FIND JOBS
+        ========================= */
+
+        .find-jobs-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            background: #16a34a;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+
+        .find-jobs-btn:hover {
+            background: #15803d;
+        }
+
+
+        /* =========================
+           JOB CARD
+        ========================= */
+
+        .job-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 22px;
+            border-radius: 14px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+
+        .job-card h3 {
+            margin-bottom: 12px;
+        }
+
+
+        .job-card p {
+            margin: 7px 0;
+            line-height: 1.5;
+        }
+
+
+        .interest-btn {
+            margin-top: 15px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+
+        .interest-btn:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 20px;
+            }
+
+            .container {
+                margin: 20px auto;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+            .voice-button {
+                width: 125px;
+                height: 125px;
+                font-size: 45px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+        <h1>🛠️ Mera Hunar</h1>
+
+        <p>
+            Aapka hunar. Aapki pehchaan. Aapka kaam.
+        </p>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <div class="container">
+
+
+        <button
+            type="button"
+            class="back"
+            onclick="goBack()"
+        >
+            ← Wapas Jayein
+        </button>
+
+
+        <div class="card">
+
+
+            <!-- =========================
+                 TITLE
+            ========================= -->
+
+            <div class="title">
+
+                <div class="icon">
+                    👷
+                </div>
+
+
+                <h2>
+                    Apna Hunar Batayein
+                </h2>
+
+
+                <p class="subtitle">
+
+                    Aapko likhne ki zarurat nahi hai.
+                    Bas button dabayein aur apne kaam ke
+                    baare mein boliye.
+
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 VOICE
+            ========================= -->
+
+            <div class="voice-section">
+
+                <button
+                    type="button"
+                    id="voiceButton"
+                    class="voice-button"
+                    onclick="startVoice()"
+                >
+                    🎙️
+                </button>
+
+
+                <div
+                    id="voiceText"
+                    class="voice-text"
+                >
+                    Bolne ke liye mic dabayein
+                </div>
+
+
+                <div class="language-text">
+
+                    Hindi / Hinglish mein bol sakte hain
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 TEXT
+            ========================= -->
+
+            <label for="workerStatement">
+
+                Aapne kya kaha:
+
+            </label>
+
+
+            <textarea
+                id="workerStatement"
+                placeholder="Aapki boli hui baat yahan automatically aayegi..."
+            ></textarea>
+
+
+            <!-- =========================
+                 EXAMPLE
+            ========================= -->
+
+            <div class="example">
+
+                💡 <strong>Example:</strong>
+
+                <br><br>
+
+                "Main mason hoon, 8 saal se kaam kar raha hoon.
+                Brick work, plastering aur tile fitting aata hai.
+                Ramgarh mein kaam chahiye."
+
+            </div>
+
+
+            <!-- =========================
+                 PROFILE BUTTON
+            ========================= -->
+
+            <button
+                type="button"
+                id="profileButton"
+                class="submit-btn"
+                onclick="createProfile()"
+            >
+
+                🤖 Mera Profile Banayein
+
+            </button>
+
+
+            <!-- =========================
+                 RESULT
+            ========================= -->
+
+            <div id="result"></div>
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+
+        /* =====================================================
+           VARIABLES
+        ===================================================== */
+
+
+        const SpeechRecognition =
+            window.SpeechRecognition ||
+            window.webkitSpeechRecognition;
+
+
+        let recognition = null;
+
+
+        let isListening = false;
+
+
+        let currentWorkerId = null;
+
+
+        /*
+         IMPORTANT FIX:
+
+         We keep a separate copy of the worker's statement.
+         So even if the textarea changes,
+         the profile request still has the original text.
+        */
+
+        let savedWorkerStatement = "";
+
+
+        /* =====================================================
+           SPEECH RECOGNITION
+        ===================================================== */
+
+
+        if (SpeechRecognition) {
+
+
+            recognition =
+                new SpeechRecognition();
+
+
+            recognition.lang =
+                "hi-IN";
+
+
+            recognition.continuous =
+                false;
+
+
+            recognition.interimResults =
+                true;
+
+
+            /* =========================
+               START
+            ========================= */
+
+            recognition.onstart =
+                function () {
+
+
+                    isListening = true;
+
+
+                    const button =
+                        document.getElementById(
+                            "voiceButton"
+                        );
+
+
+                    const voiceText =
+                        document.getElementById(
+                            "voiceText"
+                        );
+
+
+                    button.classList.add(
+                        "listening"
+                    );
+
+
+                    button.innerHTML =
+                        "🔴";
+
+
+                    voiceText.innerHTML =
+                        "🎤 Sun raha hoon... Boliye";
+
+
+                };
+
+
+            /* =========================
+               RESULT
+            ========================= */
+
+            recognition.onresult =
+                function (event) {
+
+
+                    let finalText =
+                        "";
+
+
+                    let interimText =
+                        "";
+
+
+                    for (
+                        let i = event.resultIndex;
+                        i < event.results.length;
+                        i++
+                    ) {
+
+
+                        const transcript =
+                            event.results[i][0].transcript;
+
+
+                        if (
+                            event.results[i].isFinal
+                        ) {
+
+
+                            finalText +=
+                                transcript;
+
+
+                        }
+
+                        else {
+
+
+                            interimText +=
+                                transcript;
+
+                        }
+
+                    }
+
+
+                    const textarea =
+                        document.getElementById(
+                            "workerStatement"
+                        );
+
+
+                    /*
+                     Use final text when available.
+                    */
+
+                    if (
+                        finalText.trim()
+                    ) {
+
+
+                        textarea.value =
+                            finalText.trim();
+
+
+                        savedWorkerStatement =
+                            finalText.trim();
+
+                    }
+
+
+                    /*
+                     Otherwise show interim text.
+                    */
+
+                    else if (
+                        interimText.trim()
+                    ) {
+
+
+                        textarea.value =
+                            interimText.trim();
+
+
+                    }
+
+                };
+
+
+            /* =========================
+               END
+            ========================= */
+
+            recognition.onend =
+                function () {
+
+
+                    isListening =
+                        false;
+
+
+                    const button =
+                        document.getElementById(
+                            "voiceButton"
+                        );
+
+
+                    const voiceText =
+                        document.getElementById(
+                            "voiceText"
+                        );
+
+
+                    button.classList.remove(
+                        "listening"
+                    );
+
+
+                    button.innerHTML =
+                        "🎙️";
+
+
+                    const textarea =
+                        document.getElementById(
+                            "workerStatement"
+                        );
+
+
+                    /*
+                     Save whatever is currently
+                     inside textarea.
+                    */
+
+                    if (
+                        textarea.value.trim()
+                    ) {
+
+
+                        savedWorkerStatement =
+                            textarea.value.trim();
+
+
+                        voiceText.innerHTML =
+                            "✅ Aapki baat record ho gayi";
+
+                    }
+
+                    else {
+
+
+                        voiceText.innerHTML =
+                            "⚠️ Kuch suna nahi gaya. Dobara boliye.";
+
+                    }
+
+                };
+
+
+            /* =========================
+               ERROR
+            ========================= */
+
+            recognition.onerror =
+                function (event) {
+
+
+                    isListening =
+                        false;
+
+
+                    const button =
+                        document.getElementById(
+                            "voiceButton"
+                        );
+
+
+                    const voiceText =
+                        document.getElementById(
+                            "voiceText"
+                        );
+
+
+                    button.classList.remove(
+                        "listening"
+                    );
+
+
+                    button.innerHTML =
+                        "🎙️";
+
+
+                    if (
+                        event.error ===
+                        "not-allowed"
+                    ) {
+
+
+                        voiceText.innerHTML =
+                            "⚠️ Microphone permission allow karein";
+
+                    }
+
+
+                    else if (
+                        event.error ===
+                        "no-speech"
+                    ) {
+
+
+                        voiceText.innerHTML =
+                            "⚠️ Kuch suna nahi gaya. Dobara boliye.";
+
+                    }
+
+
+                    else {
+
+
+                        voiceText.innerHTML =
+                            "⚠️ Voice mein problem hui. Dobara try karein.";
+
+                    }
+
+
+                    console.error(
+                        "Speech recognition error:",
+                        event.error
+                    );
+
+                };
+
+        }
+
+
+        /* =====================================================
+           START VOICE
+        ===================================================== */
+
+
+        function startVoice() {
+
+
+            if (!recognition) {
+
+
+                alert(
+                    "Aapka browser voice recognition support nahi karta. Chrome mein try karein."
+                );
+
+
+                return;
+
+            }
+
+
+            if (isListening) {
+
+
+                recognition.stop();
+
+
+                return;
+
+            }
+
+
+            const textarea =
+                document.getElementById(
+                    "workerStatement"
+                );
+
+
+            /*
+             Clear old statement only when
+             starting a NEW voice recording.
+            */
+
+            textarea.value = "";
+
+
+            savedWorkerStatement = "";
+
+
+            try {
+
+
+                recognition.start();
+
+
+            }
+
+            catch (error) {
+
+
+                console.error(
+                    "Voice start error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           BACK
+        ===================================================== */
+
+
+        function goBack() {
+
+
+            window.location.href =
+                "dashboard.html";
+
+        }
+
+
+        /* =====================================================
+           CREATE PROFILE
+        ===================================================== */
+        async function createProfile() {
+            if (recognition && isListening) {
+    recognition.stop();
+    isListening = false;
+}
+
+    const textarea =
+        document.getElementById("workerStatement");
+
+    const result =
+        document.getElementById("result");
+        
+
+
+        
+
+
+            const button =
+                document.getElementById(
+                    "profileButton"
+                );
+
+
+            /*
+             STEP 1:
+             Read current textarea.
+            */
+
+            let statement =
+                textarea.value.trim();
+
+
+            /*
+             STEP 2:
+             If textarea is empty,
+             use saved statement.
+            */
+
+            if (
+                !statement &&
+                savedWorkerStatement
+            ) {
+
+
+                statement =
+                    savedWorkerStatement.trim();
+
+            }
+
+
+            console.log(
+                "===================================="
+            );
+
+
+            console.log(
+                "WORKER STATEMENT:"
+            );
+
+
+            console.log(
+                statement
+            );
+
+
+            console.log(
+                "LENGTH:",
+                statement.length
+            );
+
+
+            console.log(
+                "===================================="
+            );
+
+
+            /*
+             STEP 3:
+             Empty check.
+            */
+
+            if (!statement) {
+
+
+                result.innerHTML = `
+
+                    <div class="error-box">
+
+                        ⚠️ Pehle apna hunar likhiye
+                        ya mic se boliye.
+
+                    </div>
+
+                `;
+
+
+                return;
+
+            }
+
+
+            /*
+             Save statement.
+            */
+
+            savedWorkerStatement =
+                statement;
+
+
+            /*
+             Disable button.
+            */
+
+            button.disabled =
+                true;
+
+
+            button.innerHTML =
+                "🤖 Profile Ban Raha Hai...";
+
+
+            /*
+             Show loading.
+            */
+
+            result.innerHTML = `
+
+                <div class="loading">
+
+                    🤖 AI aapka profile bana raha hai...
+
+                    <br><br>
+
+                    Thoda wait karein...
+
+                </div>
+
+            `;
+
+
+            try {
+
+
+                /*
+                 IMPORTANT:
+
+                 Encode the worker statement
+                 before sending it to FastAPI.
+                */
+
+                const url =
+                    "http://127.0.0.1:8000/create-worker-profile?worker_statement="
+                    +
+                    encodeURIComponent(
+                        statement
+                    );
+
+
+                console.log(
+                    "REQUEST URL:",
+                    url
+                );
+
+
+                /*
+                 Call FastAPI.
+                */
+
+                const response =
+                    await fetch(
+                        url,
+                        {
+                            method: "POST"
+                        }
+                    );
+
+
+                console.log(
+                    "HTTP STATUS:",
+                    response.status
+                );
+
+
+                /*
+                 If backend gives an error.
+                */
+
+                if (!response.ok) {
+
+
+                    const errorText =
+                        await response.text();
+
+
+                    console.error(
+                        "BACKEND ERROR:",
+                        errorText
+                    );
+
+
+                    throw new Error(
+                        "Backend returned HTTP "
+                        +
+                        response.status
+                        +
+                        ": "
+                        +
+                        errorText
+                    );
+
+                }
+
+
+                /*
+                 Read JSON.
+                */
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "BACKEND RESPONSE:",
+                    data
+                );
+
+
+                /*
+                 Get profile.
+                */
+
+                const profile =
+                    data.profile;
+
+
+                if (!profile) {
+
+
+                    throw new Error(
+                        "Backend response mein profile nahi mila."
+                    );
+
+                }
+
+
+                /*
+                 Save worker ID.
+                */
+
+                currentWorkerId =
+                    data.worker_id;
+
+
+                console.log(
+                    "WORKER ID:",
+                    currentWorkerId
+                );
+
+
+                /*
+                 Create skills HTML.
+                */
+
+                let skillsHTML =
+                    "";
+
+
+                if (
+                    profile.skills &&
+                    Array.isArray(
+                        profile.skills
+                    )
+                ) {
+
+
+                    skillsHTML =
+                        profile.skills
+                            .map(
+                                function(skill) {
+
+                                    return `
+                                        <span class="skill">
+                                            ${skill}
+                                        </span>
+                                    `;
+
+                                }
+                            )
+                            .join("");
+
+                }
+
+
+                /*
+                 Show profile.
+                */
+
+                result.innerHTML = `
+
+                    <div class="profile">
+
+
+                        <h3>
+
+                            ✅ Aapka Hunar Profile
+                            Taiyaar Hai
+
+                        </h3>
+
+
+                        <p>
+
+                            <strong>
+                                Naam:
+                            </strong>
+
+                            ${
+                                profile.name
+                                || "Not provided"
+                            }
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Kaam:
+                            </strong>
+
+                            ${
+                                profile.occupation
+                                || "Not provided"
+                            }
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Experience:
+                            </strong>
+
+                            ${
+                                profile.experience_years
+                                ?? 0
+                            }
+
+                            years
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Location:
+                            </strong>
+
+                            ${
+                                profile.preferred_location
+                                || "Not provided"
+                            }
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Skills:
+                            </strong>
+
+                            <br>
+
+                            ${
+                                skillsHTML
+                                || "No skills provided"
+                            }
+
+                        </p>
+
+
+                        <button
+                            type="button"
+                            class="find-jobs-btn"
+                            onclick="findJobs()"
+                        >
+
+                            🔎 Mere Liye Kaam Dhundhein
+
+                        </button>
+
+
+                    </div>
+
+                `;
+
+
+            }
+
+            catch (error) {
+
+
+                console.error(
+                    "PROFILE ERROR:",
+                    error
+                );
+
+
+                result.innerHTML = `
+
+                    <div class="error-box">
+
+                        ❌ Profile banane mein problem aa rahi hai.
+
+                        <br><br>
+
+                        <strong>
+                            Error:
+                        </strong>
+
+                        ${error.message}
+
+                    </div>
+
+                `;
+
+            }
+
+
+            finally {
+
+
+                /*
+                 Enable button again.
+                */
+
+                button.disabled =
+                    false;
+
+
+                button.innerHTML =
+                    "🤖 Mera Profile Banayein";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           FIND JOBS
+        ===================================================== */
+
+
+        async function findJobs() {
+
+
+            const result =
+                document.getElementById(
+                    "result"
+                );
+
+
+            result.innerHTML = `
+
+                <div class="loading">
+
+                    🔎 Aapke liye available
+                    kaam dhundh rahe hain...
+
+                </div>
+
+            `;
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        "http://127.0.0.1:8000/all-jobs"
+                    );
+
+
+                if (!response.ok) {
+
+
+                    throw new Error(
+                        "Jobs fetch nahi ho paaye."
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "AVAILABLE JOBS:",
+                    data
+                );
+
+
+                /*
+                 No jobs.
+                */
+
+                if (
+                    !data.jobs ||
+                    data.jobs.length === 0
+                ) {
+
+
+                    result.innerHTML = `
+
+                        <div class="profile">
+
+                            <h3>
+
+                                😔 Abhi koi kaam
+                                available nahi hai.
+
+                            </h3>
+
+
+                            <p>
+
+                                Naye kaam available
+                                hone par yahan dikh jayenge.
+
+                            </p>
+
+                        </div>
+
+                    `;
+
+
+                    return;
+
+                }
+
+
+                /*
+                 Create jobs HTML.
+                */
+
+                let html = `
+
+                    <div>
+
+                        <h3
+                            style="
+                                margin-bottom:20px;
+                            "
+                        >
+
+                            🔎 Available Jobs
+
+                        </h3>
+
+                `;
+
+
+                data.jobs.forEach(
+                    function(job) {
+
+
+                        html += `
+
+                            <div class="job-card">
+
+
+                                <h3>
+
+                                    🏗️
+                                    ${
+                                        job.required_occupation
+                                    }
+
+                                </h3>
+
+
+                                <p>
+
+                                    📍
+                                    <strong>
+                                        Location:
+                                    </strong>
+
+                                    ${
+                                        job.location
+                                    }
+
+                                </p>
+
+
+                                <p>
+
+                                    ⏱️
+                                    <strong>
+                                        Experience:
+                                    </strong>
+
+                                    ${
+                                        job.min_experience
+                                    }
+                                    years+
+
+                                </p>
+
+
+                                <p>
+
+                                    🔨
+                                    <strong>
+                                        Skills:
+                                    </strong>
+
+                                    ${
+                                        job.required_skills
+                                    }
+
+                                </p>
+
+
+                                <p>
+
+                                    📝
+                                    <strong>
+                                        Work:
+                                    </strong>
+
+                                    ${
+                                        job.job_description
+                                        ||
+                                        "Details available"
+                                    }
+
+                                </p>
+
+
+                                <button
+                                    type="button"
+                                    class="interest-btn"
+                                    onclick="
+                                        applyForJob(
+                                            '${job.job_id}'
+                                        )
+                                    "
+                                >
+
+                                    🙋 Is Kaam Mein
+                                    Interested Hoon
+
+                                </button>
+
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
+
+                html += `
+
+                    </div>
+
+                `;
+
+
+                result.innerHTML =
+                    html;
+
+            }
+
+
+            catch (error) {
+
+
+                console.error(
+                    "JOB ERROR:",
+                    error
+                );
+
+
+                result.innerHTML = `
+
+                    <div class="error-box">
+
+                        ❌ Jobs load nahi ho pa rahe hain.
+
+                        <br><br>
+
+                        <strong>
+                            Error:
+                        </strong>
+
+                        ${error.message}
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           APPLY FOR JOB
+        ===================================================== */
+        
+async function applyForJob(jobId) {
+    if (!currentWorkerId) {
+        alert("Pehle apna profile banayein.");
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            "http://127.0.0.1:8000/apply-job?job_id=" +
+            encodeURIComponent(jobId) +
+            "&worker_id=" +
+            encodeURIComponent(currentWorkerId),
+            { method: "POST" }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok || data.error) {
+            throw new Error(
+                data.detail || data.error || "Application failed."
+            );
+        }
+
+        alert(
+            data.status === "Already Interested"
+                ? "You have already shown interest in this job."
+                : "✅ Your interest has been submitted successfully!"
+        );
+
+    } catch (error) {
+        console.error("APPLICATION ERROR:", error);
+        alert("❌ Could not submit interest: " + error.message);
+    }
+}
+
+    </script>
+
+
+</body>
+
+</html>

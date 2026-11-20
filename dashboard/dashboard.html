@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mera Hunar</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 25px 50px;
+        }
+
+        header h1 {
+            font-size: 30px;
+        }
+
+        header p {
+            margin-top: 6px;
+            color: #d1d5db;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .welcome h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .welcome p {
+            font-size: 18px;
+            color: #6b7280;
+            margin-bottom: 45px;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .option-card {
+            background: white;
+            padding: 45px 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: 0.2s;
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .option-card h3 {
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .option-card p {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        button {
+            border: none;
+            padding: 13px 28px;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 20px;
+            }
+
+            .container {
+                margin-top: 35px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🛠️ Mera Hunar</h1>
+        <p>Aapka hunar. Aapki pehchaan. Aapka kaam.</p>
+    </header>
+
+    <div class="container">
+
+        <div class="welcome">
+            <h2>Namaste! 👋</h2>
+            <p>Aap kya karna chahte hain?</p>
+        </div>
+
+        <div class="options">
+
+            <!-- WORKER -->
+            <div class="option-card">
+
+                <div class="icon">👷</div>
+
+                <h3>Mujhe Kaam Chahiye</h3>
+
+                <p>
+                    Apna hunar batayein aur apne liye
+                    suitable kaam dhundhein.
+                </p>
+
+                <button onclick="workerPage()">
+                    Shuru Karein
+                </button>
+
+            </div>
+
+
+            <!-- EMPLOYER -->
+            <div class="option-card">
+
+                <div class="icon">🏗️</div>
+
+                <h3>Mujhe Kaam Karwana Hai</h3>
+
+                <p>
+                    Apne kaam ke liye suitable
+                    skilled workers dhundhein.
+                </p>
+
+                <button onclick="employerPage()">
+                    Shuru Karein
+                </button>
+
+            </div>
+
+        </div>
+
+        <footer>
+            Mera Hunar © 2026
+        </footer>
+
+    </div>
+
+
+    <script>
+
+        function workerPage() {
+    window.location.href = "worker.html";
+}
+
+        function employerPage() {
+    window.location.href = "employer.html";
+}
+
+    </script>
+
+</body>
+
+</html>

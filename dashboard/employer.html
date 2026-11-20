@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mera Hunar - Employer</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 25px 50px;
+        }
+
+        header h1 {
+            font-size: 30px;
+        }
+
+        header p {
+            margin-top: 6px;
+            color: #d1d5db;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .back {
+            background: transparent;
+            color: #2563eb;
+            padding: 0;
+            margin-bottom: 25px;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back:hover {
+            background: transparent;
+            color: #1d4ed8;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            font-size: 16px;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            background: #2563eb;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #1d4ed8;
+        }
+
+        #result {
+            margin-top: 30px;
+        }
+
+        .loading {
+            text-align: center;
+            color: #6b7280;
+        }
+
+        .success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .success h3 {
+            color: #166534;
+            margin-bottom: 10px;
+        }
+
+        .match-btn {
+            width: 100%;
+            margin-top: 15px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #16a34a;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .match-btn:hover {
+            background: #15803d;
+        }
+
+        .interested-btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .interested-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .worker-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .worker-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .worker-card p {
+            margin-top: 6px;
+        }
+
+        .match-score {
+            margin-top: 12px;
+            color: #16a34a;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .application-status {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            background: #dcfce7;
+            color: #166534;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .error {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 20px;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <header>
+
+        <h1>🛠️ Mera Hunar</h1>
+
+        <p>
+            Aapka hunar. Aapki pehchaan. Aapka kaam.
+        </p>
+
+    </header>
+
+
+    <div class="container">
+
+        <button
+            class="back"
+            onclick="goBack()"
+        >
+            ← Wapas Jayein
+        </button>
+
+
+        <div class="card">
+
+            <div class="title">
+
+                <div class="icon">
+                    🏗️
+                </div>
+
+                <h2>
+                    Mujhe Kaam Karwana Hai
+                </h2>
+
+                <p class="subtitle">
+                    Aapko kis tarah ka worker chahiye?
+                    Details batayein, hum suitable workers dhundhenge.
+                </p>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Aapko kis kaam ka worker chahiye?
+                </label>
+
+                <input
+                    type="text"
+                    id="occupation"
+                    placeholder="Jaise: Mason"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    id="location"
+                    placeholder="Jaise: Ramgarh"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Minimum Experience
+                </label>
+
+                <input
+                    type="number"
+                    id="experience"
+                    placeholder="Jaise: 5"
+                    min="0"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Required Skills
+                </label>
+
+                <input
+                    type="text"
+                    id="skills"
+                    placeholder="Jaise: Brick work, Plastering"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Kaam ke baare mein thoda batayein
+                </label>
+
+                <textarea
+                    id="description"
+                    placeholder="Jaise: Residential building ke liye experienced mason chahiye."
+                ></textarea>
+
+            </div>
+
+
+            <button
+                class="submit-btn"
+                onclick="createJob()"
+            >
+                🔎 Suitable Workers Dhundhein
+            </button>
+
+
+            <div id="result"></div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+
+        function goBack() {
+
+            window.location.href = "dashboard.html";
+
+        }
+
+
+
+        async function createJob() {
+
+            const occupation =
+                document.getElementById("occupation").value.trim();
+
+            const location =
+                document.getElementById("location").value.trim();
+
+            const experience =
+                document.getElementById("experience").value;
+
+            const skills =
+                document.getElementById("skills").value.trim();
+
+            const description =
+                document.getElementById("description").value.trim();
+
+            const result =
+                document.getElementById("result");
+
+
+            if (
+                !occupation ||
+                !location ||
+                !experience ||
+                !skills
+            ) {
+
+                result.innerHTML =
+                    '<p class="error">Please required details fill karein.</p>';
+
+                return;
+
+            }
+
+
+            result.innerHTML =
+                '<div class="loading">🤖 AI job requirement process kar raha hai...</div>';
+
+
+            try {
+
+                const params =
+                    new URLSearchParams();
+
+                params.append(
+                    "contractor_name",
+                    "Mera Hunar Employer"
+                );
+
+                params.append(
+                    "required_occupation",
+                    occupation
+                );
+
+                params.append(
+                    "required_skills",
+                    skills
+                );
+
+                params.append(
+                    "location",
+                    location
+                );
+
+                params.append(
+                    "min_experience",
+                    experience
+                );
+
+                params.append(
+                    "job_description",
+                    description
+                );
+
+
+                const response =
+                    await fetch(
+                        "http://127.0.0.1:8000/create-job?" +
+                        params.toString(),
+                        {
+                            method: "POST"
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Job creation failed"
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                result.innerHTML = `
+
+                    <div class="success">
+
+                        <h3>
+                            ✅ Job Requirement Created
+                        </h3>
+
+                        <p>
+                            Job ID:
+                            <strong>
+                                ${data.job_id}
+                            </strong>
+                        </p>
+
+
+                        <button
+                            class="match-btn"
+                            onclick="findWorkers('${data.job_id}')"
+                        >
+                            🤖 Best Workers Dhundhein
+                        </button>
+
+
+                        <button
+                            class="interested-btn"
+                            onclick="viewInterestedWorkers('${data.job_id}')"
+                        >
+                            👷 Interested Workers Dekhein
+                        </button>
+
+                    </div>
+
+                `;
+
+
+            } catch (error) {
+
+                result.innerHTML = `
+
+                    <p class="error">
+                        Server se connect nahi ho pa raha hai.
+                    </p>
+
+                `;
+
+                console.error(error);
+
+            }
+
+        }
+
+
+
+        async function findWorkers(jobId) {
+
+            const result =
+                document.getElementById("result");
+
+
+            result.innerHTML =
+                '<div class="loading">🤖 AI workers ko match kar raha hai...<br><br>Thoda time lag sakta hai.</div>';
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://127.0.0.1:8000/match-job/" +
+                        jobId
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Matching failed"
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !data.matches ||
+                    data.matches.length === 0
+                ) {
+
+                    result.innerHTML = `
+
+                        <p class="error">
+                            Is job ke liye abhi suitable workers nahi mile.
+                        </p>
+
+                    `;
+
+                    return;
+
+                }
+
+
+                let html = `
+
+                    <h3 style="margin-bottom:20px;">
+                        🏆 Suitable Workers
+                    </h3>
+
+                `;
+
+
+                data.matches.forEach(
+                    (worker, index) => {
+
+                        html += `
+
+                            <div class="worker-card">
+
+                                <h3>
+                                    ${index + 1}.
+                                    ${worker.name}
+                                </h3>
+
+
+                                <p>
+                                    <strong>
+                                        Occupation:
+                                    </strong>
+
+                                    ${worker.occupation}
+                                </p>
+
+
+                                <p>
+                                    <strong>
+                                        Experience:
+                                    </strong>
+
+                                    ${worker.experience_years}
+                                    years
+                                </p>
+
+
+                                <p>
+                                    <strong>
+                                        Location:
+                                    </strong>
+
+                                    ${worker.preferred_location}
+                                </p>
+
+
+                                <p>
+                                    <strong>
+                                        Skills:
+                                    </strong>
+
+                                    ${worker.skills}
+                                </p>
+
+
+                                <p class="match-score">
+
+                                    Match Score:
+
+                                    ${worker.final_match_score}%
+
+                                </p>
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
+
+                result.innerHTML =
+                    html;
+
+
+            } catch (error) {
+
+                result.innerHTML = `
+
+                    <p class="error">
+                        Worker matching mein problem aa gayi.
+                    </p>
+
+                `;
+
+                console.error(error);
+
+            }
+
+        }
+
+
+
+        async function viewInterestedWorkers(jobId) {
+
+            const result =
+                document.getElementById("result");
+
+
+            result.innerHTML =
+                '<div class="loading">⏳ Interested workers load ho rahe hain...</div>';
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://127.0.0.1:8000/job-applications/" +
+                        encodeURIComponent(jobId)
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Applications load nahi ho paayi."
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !data.applications ||
+                    data.applications.length === 0
+                ) {
+
+                    result.innerHTML = `
+
+                        <div class="success">
+
+                            <h3>
+                                👷 Interested Workers
+                            </h3>
+
+                            <p style="margin-top:10px;">
+                                Abhi tak kisi worker ne is job mein
+                                interest nahi dikhaya hai.
+                            </p>
+
+                        </div>
+
+                    `;
+                    sessionStorage.setItem(
+    "meraHunarJobResult",
+    result.innerHTML
+);
+
+                    return;
+
+                }
+
+
+                let html = `
+
+                    <div class="success">
+
+                        <h3>
+                            👷 Interested Workers
+                        </h3>
+
+                        <p style="margin-top:10px;">
+                            Total interested workers:
+                            <strong>
+                                ${data.total_applications}
+                            </strong>
+                        </p>
+
+                    </div>
+
+                `;
+
+
+                data.applications.forEach(
+                    (worker, index) => {
+
+                        html += `
+
+                            <div class="worker-card">
+
+                                <h3>
+                                    ${index + 1}.
+                                    ${worker.name}
+                                </h3>
+
+
+                                <p>
+                                    <strong>
+                                        Occupation:
+                                    </strong>
+
+                                    ${worker.occupation}
+                                </p>
+
+
+                                <p>
+                                    <strong>
+                                        Experience:
+                                    </strong>
+
+                                    ${worker.experience_years}
+                                    years
+                                </p>
+
+
+                                <p>
+                                    <strong>
+                                        Location:
+                                    </strong>
+
+                                    ${worker.preferred_location}
+                                </p>
+
+
+                                <p>
+                                    <strong>
+                                        Skills:
+                                    </strong>
+
+                                    ${worker.skills}
+                                </p>
+
+
+                                <p>
+                                    <strong>
+                                        Availability:
+                                    </strong>
+
+                                    ${worker.availability}
+                                </p>
+
+
+                                <p>
+                                    <strong>
+                                        Verification:
+                                    </strong>
+
+                                    ${worker.verification_status}
+                                </p>
+
+
+                                <span class="application-status">
+                                    ${worker.status}
+                                </span>
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
+
+                result.innerHTML =
+                    html;
+
+
+            } catch (error) {
+
+                result.innerHTML = `
+
+                    <p class="error">
+                        Interested workers load karne mein problem aa gayi.
+                    </p>
+
+                `;
+
+                console.error(
+                    "INTERESTED WORKERS ERROR:",
+                    error
+                );
+
+            }
+
+        }
+        window.addEventListener("DOMContentLoaded", function () {
+
+    const savedResult = sessionStorage.getItem(
+        "meraHunarJobResult"
+    );
+
+    if (savedResult) {
+        document.getElementById("result").innerHTML =
+            savedResult;
+    }
+
+});
+
+
+    </script>
+
+</body>
+
+</html>
